@@ -51,7 +51,7 @@ export class UIManager {
       <div class="item" data-row="${rowIndex}" data-col="${colIndex}">
         <div class="item-image">
           <img src="${getImageUrl(item.image, 400, 200)}"
-              alt="${item.title}"
+              alt="${item.title} poster"
               onerror="this.src='${getImageUrl(item.logo, 200, 200)}'; this.alt='image-failed'"
               loading="lazy">
           <img class="item-image-watermark" src="${getImageUrl(
@@ -74,10 +74,14 @@ export class UIManager {
     this.content.innerHTML = collections
       .map(
         (collection, rowIndex) => `
-          <div class="collection" data-row="${rowIndex}" data-id="${collection.id}">
-            <h1 class="collection-title">${collection.name?.toLocaleUpperCase()}</h1>
-            <div class="items-row">
-              ${this.renderImage(collection, rowIndex)}
+          <div class="collection" data-row="${rowIndex}" data-id="${collection.id}" aria-label="${
+          collection.name
+        } collection">
+            <h1 id="collection-${
+              collection.id
+            }" class="collection-title">${collection.name?.toLocaleUpperCase()}</h1>
+            <div class="items-row" role="list" aria-labelledby="collection-${collection.id}">
+                ${this.renderImage(collection, rowIndex)}
             </div>
           </div>
         `
@@ -133,12 +137,18 @@ export class UIManager {
   }
 
   public updateFocus(row: number, col: number) {
-    document.querySelectorAll(".item.focused").forEach((el) => el.classList.remove("focused"));
-    const item = document.querySelector(`.item[data-row="${row}"][data-col="${col}"]`);
-    if (!item) return;
+    const previousFocus = document.querySelector(".item.focused");
+    const newFocus = document.querySelector(`.item[data-row="${row}"][data-col="${col}"]`);
 
-    item.classList.add("focused");
-    item.scrollIntoView({ block: "center" });
+    previousFocus?.classList.remove("focused");
+    previousFocus?.setAttribute("aria-selected", "false");
+
+    if (newFocus) {
+      newFocus.classList.add("focused");
+      newFocus.setAttribute("aria-selected", "true");
+      (newFocus as HTMLElement).focus();
+      newFocus.scrollIntoView({ block: "center" });
+    }
   }
 
   public showModal(item: CollectionItem) {
@@ -151,12 +161,18 @@ export class UIManager {
     modalGenre.textContent = item.genre || "";
     modalDescription.textContent = item.description;
     (modalImg as HTMLImageElement).src = getImageUrl(item.image, 400, 200);
+    (modalImg as HTMLImageElement).onerror = function () {
+      this.src = getImageUrl(item.logo, 400, 200);
+    };
+    this.modal.setAttribute("aria-labelledby", `modal-${item.title}`);
+    this.modal.setAttribute("aria-describedby", "modal-collection-description modal-collection-genre");
 
     this.modal.classList.remove("hidden");
   }
 
   public closeModal() {
     this.modal.classList.add("hidden");
+    this.modal.setAttribute("aria-hidden", "true");
   }
 
   public setupInfinitieScroll() {

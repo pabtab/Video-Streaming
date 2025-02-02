@@ -9,7 +9,7 @@ export function santizeCollection(component: TCollectionComponent): Collection {
       title: item.visuals.headline,
       description: item.visuals.body,
       rating: item.entity_metadata.rating.code,
-      genre: item.entity_metadata.genre_names?.[0],
+      genre: item.entity_metadata.genre_names?.join(", "),
       image: item.visuals.artwork.horizontal_tile.image.path,
       premiereDate: item.entity_metadata.premiere_date,
       watermark: item.visuals.primary_branding?.artwork["brand.watermark.bottom.right"].path,

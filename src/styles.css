@@ -17,6 +17,13 @@ h4 {
   margin: 0;
 }
 
+.title-header {
+  font-size: 50px;
+  text-align: center;
+  text-decoration: underline;
+  margin-bottom: 40px;
+}
+
 #content {
   display: flex;
   flex-direction: column;
@@ -43,7 +50,6 @@ h4 {
 .item {
   flex-shrink: 0;
   width: 400px;
-  height: 200px;
 }
 
 .item-title {
@@ -71,6 +77,7 @@ h4 {
   border-radius: 10px;
   overflow: hidden;
   position: relative;
+  height: 200px;
 }
 
 .item img:first-child {
