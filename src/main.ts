@@ -1,6 +1,6 @@
-import { fetchHub } from "./api";
+import { UIManager } from "./ui";
 
 document.addEventListener("DOMContentLoaded", () => {
-  const data = fetchHub();
-  console.log(data);
+  const ui = new UIManager();
+  ui.init();
 });
