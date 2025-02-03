@@ -12,7 +12,7 @@ export function santizeCollection(component: TCollectionComponent): Collection {
       genre: item.entity_metadata.genre_names?.join(", "),
       image: item.visuals.artwork.horizontal_tile.image.path,
       premiereDate: item.entity_metadata.premiere_date,
-      watermark: item.visuals.primary_branding?.artwork["brand.watermark.bottom.right"].path,
+      watermark: item.visuals.primary_branding?.artwork["brand.watermark.bottom.right"].path ?? "",
       logo: item.visuals.primary_branding?.artwork["brand.logo"].path,
     })),
   };

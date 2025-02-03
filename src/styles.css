@@ -1,13 +1,14 @@
 :root {
   --transition-speed: 0.2s;
+  --hulu-brand-color: #1ce783;
 }
 
 body {
   margin: 0;
-  padding: 20px;
+  padding: 50px;
   background: black;
   color: white;
-  font-family: Arial, sans-serif;
+  font-family: Graphik, Helvetica, Arial, sans-serif;
 }
 
 h1,
@@ -20,8 +21,8 @@ h4 {
 .title-header {
   font-size: 50px;
   text-align: center;
-  text-decoration: underline;
   margin-bottom: 40px;
+  color: var(--hulu-brand-color);
 }
 
 #content {
@@ -44,12 +45,14 @@ h4 {
 .items-row {
   display: flex;
   gap: 16px;
-  overflow: hidden;
 }
 
 .item {
   flex-shrink: 0;
   width: 400px;
+  height: 300px;
+  transition: transform 0.3s ease;
+  transform-origin: center;
 }
 
 .item-title {
@@ -85,8 +88,17 @@ h4 {
   object-fit: cover;
 }
 
+.item.focused {
+  transform: scale(1.05);
+  z-index: 1;
+}
+
 .item.focused > .item-image {
   border: solid 5px white;
+}
+
+.item:not(.focused) {
+  transform: scale(1);
 }
 
 .item-image-watermark {

@@ -54,14 +54,16 @@ export class UIManager {
               alt="${item.title} poster"
               onerror="this.src='${getImageUrl(item.logo, 200, 200)}'; this.alt='image-failed'"
               loading="lazy">
-          <img class="item-image-watermark" src="${getImageUrl(
-            item.watermark,
-            100,
-            100
-          )}" alt="watermark">
+          ${
+            item.watermark
+              ? `<img class="item-image-watermark" 
+                 src="${getImageUrl(item.watermark, 100, 100)}" 
+                 alt="watermark">`
+              : ""
+          }
         </div>
         <h2 class="item-title">${item.title}</h2>
-        <h3 class="item-subtitle">${item?.rating ?? "No rating"} - ${item.genre} - ${
+        <h3 class="item-subtitle">${item?.rating ?? "No rating"} &#8226; ${item.genre} &#8226; ${
           item.premiereDate?.substring(0, 4) ?? ""
         }</h3>
       </div>
@@ -187,7 +189,6 @@ export class UIManager {
             const collectionId = collection.dataset.id;
 
             if (collectionId && !collectionsMap.get(collectionId)?.items.length) {
-              console.log(collectionsMap.get(collectionId));
               StreamingActions.fetchCollection(collectionId);
               this.intersectionObserver.unobserve(entry.target);
             }
