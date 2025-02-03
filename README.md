@@ -6,6 +6,7 @@
 - **CSS**
 - **TypeScript**
 - **Vite**
+- **Vitest**
 - **ESLint**
 - **Prettier**
 
