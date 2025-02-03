@@ -126,7 +126,6 @@ export class UIManager {
         case "Enter":
           const item = state.collections[newRow]?.items[newCol];
           if (item) {
-            console.log(item);
             StreamingActions.showModal(item);
           }
           return;
@@ -167,11 +166,11 @@ export class UIManager {
     this.modal.setAttribute("aria-labelledby", `modal-${item.title}`);
     this.modal.setAttribute("aria-describedby", "modal-collection-description modal-collection-genre");
 
-    this.modal.classList.remove("hidden");
+    this.modal.classList.add("active");
   }
 
   public closeModal() {
-    this.modal.classList.add("hidden");
+    this.modal.classList.remove("active");
     this.modal.setAttribute("aria-hidden", "true");
   }
 
