@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeEach, vi } from "vitest";
+import { describe, it, expect, beforeEach } from "vitest";
 import { streamingStore } from "../store/StreamingStore";
 import { dispatcher } from "../dispatcher/Dispatcher";
 import { ActionTypes } from "../actions/types";

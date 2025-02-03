@@ -25,6 +25,10 @@ describe("StreamingActions", () => {
             id: "1",
             name: "Collection 1",
             items: [],
+            _type: "collection",
+            href: "/collections/1",
+            theme: "default",
+            artwork: {},
           },
         ],
       };
@@ -94,7 +98,13 @@ describe("StreamingActions", () => {
     });
 
     it("should dispatch modal actions", () => {
-      const mockItem = { id: "1", title: "Test", description: "Test", image: "test.webp" };
+      const mockItem = {
+        id: "1",
+        title: "Test",
+        description: "Test",
+        image: "test.webp",
+        premiereDate: "2020-03-19",
+      };
 
       StreamingActions.showModal(mockItem);
       expect(dispatcher.dispatch).toHaveBeenCalledWith({

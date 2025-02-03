@@ -33,7 +33,7 @@ class StreamingStore extends EventEmitter {
       switch (action.type) {
         case ActionTypes.FETCH_HUB:
           this.state.loading = true;
-          this.emit("change");
+          this.emit();
           break;
 
         case ActionTypes.FETCH_HUB_SUCCESS:
@@ -42,31 +42,31 @@ class StreamingStore extends EventEmitter {
           );
           this.state.loading = false;
           this.state.error = undefined;
-          this.emit("change");
+          this.emit();
           break;
 
         case ActionTypes.FETCH_HUB_ERROR:
           this.state.error = action.payload;
           this.state.loading = false;
-          this.emit("change");
+          this.emit();
           break;
 
         case ActionTypes.UPDATE_FOCUS:
           const { row, col } = action.payload;
           this.state.currentRow = row;
           this.state.currentCol = col;
-          this.emit("change");
+          this.emit();
           break;
 
         case ActionTypes.SHOW_MODAL:
           this.state.currentItem = action.payload;
           this.state.isModalOpen = true;
-          this.emit("change");
+          this.emit();
           break;
 
         case ActionTypes.CLOSE_MODAL:
           this.state.isModalOpen = false;
-          this.emit("change");
+          this.emit();
           break;
 
         case ActionTypes.FETCH_COLLECTION_SUCCESS:
@@ -75,7 +75,7 @@ class StreamingStore extends EventEmitter {
             collection.id === newCollection.id ? santizeCollection(newCollection) : collection
           );
           this.state.collections = [...newCollections];
-          this.emit("change");
+          this.emit();
 
           break;
 
