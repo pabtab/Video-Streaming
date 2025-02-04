@@ -46,6 +46,7 @@
 
    ```bash
    yarn install
+   // Make sure you are using Node v22
    ```
 
 3. **Run the development server**:
